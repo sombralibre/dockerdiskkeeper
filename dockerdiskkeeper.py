@@ -23,7 +23,7 @@ interval = os.environ.get('INTERVAL', 18000)
 def main(argv):
     while True:
         housekeeping(scheme, diskthreshold)
-        sleep(interval)
+        sleep(int(interval))
 
 
 if __name__ == "__main__":
