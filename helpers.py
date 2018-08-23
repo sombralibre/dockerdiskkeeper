@@ -17,7 +17,7 @@ targetfs = os.environ.get("TARGETFS", "/target")
 
 
 def shouldrun(threshold):
-    return True if threshold >= fsusedspace(targetfs) else False
+    return True if float(threshold) >= fsusedspace(targetfs) else False
 
 
 def fsusedspace(path):
