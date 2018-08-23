@@ -45,8 +45,10 @@ def listObjects(handler, obj):
 def removeObjects(handler, obj, idf):
     print("Removing -- {} >>> {}".format(obj, idf))
     try:
-        return json.loads((handler[0]).delete(
-            "{}/{}".format(handler[1], obj)).text)
+        r = (handler[0]).delete(
+            "{}/{}".format(handler[1], obj))
+        r.raise_for_status()
+        return
     except Exception as e:
         print(e)
 
@@ -62,6 +64,7 @@ def housekeeping(scheme, threshold):
         for ob in objs:
             for it in listObjects(api_handler[scheme], ob):
                 if "State" in it and it["State"] in states:
+                    print("{} -- {}".format(it["State"], it["Id"]))
                     removeObjects(api_handler[scheme], ob, it["Id"])
                 elif "State" not in it:
                     removeObjects(api_handler[scheme], ob, it["Id"])
