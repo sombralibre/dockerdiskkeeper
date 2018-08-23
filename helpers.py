@@ -40,6 +40,7 @@ def listObjects(handler, obj):
 
 
 def removeObjects(handler, obj, idf):
+    print("Removing -- {} >>> {}".format(obj, idf))
     return json.loads((handler[0]).delete(
         "{}/{}".format(handler[1], obj)).text)
 
