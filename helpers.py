@@ -46,7 +46,7 @@ def removeObjects(handler, obj, idf):
     print("Removing -- {} >>> {}".format(obj, idf))
     try:
         r = (handler[0]).delete(
-            "{}/{}".format(handler[1], obj))
+            "{}/{}/{}".format(handler[1], obj, idf))
         r.raise_for_status()
         return
     except Exception as e:
