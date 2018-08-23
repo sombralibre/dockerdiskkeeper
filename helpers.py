@@ -64,7 +64,6 @@ def housekeeping(scheme, threshold):
         for ob in objs:
             for it in listObjects(api_handler[scheme], ob):
                 if "State" in it and it["State"] in states:
-                    print("{} -- {}".format(it["State"], it["Id"]))
                     removeObjects(api_handler[scheme], ob, it["Id"])
                 elif "State" not in it:
                     removeObjects(api_handler[scheme], ob, it["Id"])
