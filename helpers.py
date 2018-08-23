@@ -35,14 +35,20 @@ api_handler = {
 
 
 def listObjects(handler, obj):
-    return json.loads((handler[0]).get(
-        "{}/{}/json?all=1".format(handler[1], obj)).text)
+    try:
+        return json.loads((handler[0]).get(
+            "{}/{}/json?all=1".format(handler[1], obj)).text)
+    except Exception as e:
+        print(e)
 
 
 def removeObjects(handler, obj, idf):
     print("Removing -- {} >>> {}".format(obj, idf))
-    return json.loads((handler[0]).delete(
-        "{}/{}".format(handler[1], obj)).text)
+    try:
+        return json.loads((handler[0]).delete(
+            "{}/{}".format(handler[1], obj)).text)
+    except Exception as e:
+        print(e)
 
 
 # The whole thing
