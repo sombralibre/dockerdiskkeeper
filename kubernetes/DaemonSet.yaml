@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: diskhousekeeper
+  labels:
+    app: diskhousekeeper
+spec:
+  selector:
+    matchLabels:
+      app: diskhousekeeper
+  template:
+    metadata:
+      labels:
+        app: diskhousekeeper
+    spec:
+      volumes:
+      - name: target
+        hostPath:
+          path: "/"
+      - name: socket
+        hostPath:
+          path: "/var/run/docker.sock"
+      containers:
+      - name: dockerdiskkeeper
+        image: sombralibre/dockerdiskkeeper:latest
+        env:
+        - name: SCHEME
+          value: "unix"
+        - name: DISKLIMIT
+          value: 70
+        - name: INTERVAL
+          value: 18000
+        - name: TARGETFS
+          value: "/checkfs"
+        volumeMounts:
+        - name: target
+          readOnly: true
+          mountPath: "/checkfs"
+        - name: socket
+          mountPath: "/var/run/docker.sock"
+        resources:
+          limits:
+            memory: 50Mi
+            cpu: 50m
+
