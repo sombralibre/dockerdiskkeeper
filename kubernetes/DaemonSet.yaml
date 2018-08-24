@@ -24,14 +24,14 @@ spec:
       - name: dockerdiskkeeper
         image: sombralibre/dockerdiskkeeper:latest
         env:
-        - name: SCHEME
-          value: "unix"
-        - name: DISKLIMIT
-          value: 70
-        - name: INTERVAL
-          value: 18000
-        - name: TARGETFS
-          value: "/checkfs"
+          - name: SCHEME
+            value: "unix"
+          - name: DISKLIMIT
+            value: "80"
+          - name: INTERVAL
+            value: "18000"
+          - name: TARGETFS
+            value: "/checkfs"
         volumeMounts:
         - name: target
           readOnly: true
